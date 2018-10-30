@@ -1,0 +1,11 @@
+{
+  "namespace" : "com.example.stream-demo",
+  "type" : "record",
+  "name" : "Insurance",
+  "fields" : [
+    {"name":"plan", "type":"string"},
+    {"name":"company","type":"string"},
+    {"name":"validFrom","type":"string"},
+    {"name":"age","type":"int"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "namespace" : "com.example.stream-demo",
+  "type" : "record",
+  "name" : "Event",
+  "fields" : [
+    {"name":"name", "type":"string"},
+    {"name":"description","type":"string"},
+    {"name":"version","type":"int"}
+  ]
+}

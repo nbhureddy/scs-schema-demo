@@ -1,0 +1,57 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: stream-demo
+  cloud:
+    stream:
+      kafka:
+        binder:
+          useNativeEncoding: true
+          useNativeDecoding: true
+        bindings:
+          streamDemo:
+            producer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+                useNativeDecoding: true
+                value.subject.name.strategy: io.confluent.kafka.serializers.subject.RecordNameStrategy
+                value:
+                  serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+          streamDemoConsumer:
+            consumer:
+              configuration:
+                schema.registry.url: http://localhost:8081
+#                specific.avro.reader: true
+                value:
+                  deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      schema:
+        avro:
+          dynamic-schema-generation-enabled: true
+#          subjectNamingStrategy: io.confluent.kafka.serializers.subject.RecordNameStrategy
+      bindings:
+        streamDemo:
+          contentType: application/*+avro
+          destination: demoTopic
+#          producer:
+#            configuration:
+#              value:
+#                serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        streamDemoConsumer:
+          contentType: application/*+avro
+#          contentType: avro/bytes
+          destination: demoTopic
+#          consumer:
+#            configuration:
+#              schema.registry.url: http://localhost:8081
+#              specific.avro.reader: true
+#              value:
+#                deserializer: io.confluent.kafka.serializers.KafkaAvroDeSerializer
+#              value.subject.name.strategy: io.confluent.kafka.serializers.subject.RecordNameStrategy
+      schemaRegistryClient:
+        endpoint: http://localhost:8081
+
+#confluent:
+#  schemaregistry:
+#    endpoint: http://localhost:8081
